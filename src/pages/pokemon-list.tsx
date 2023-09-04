@@ -1,17 +1,14 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import Pokemon from '../models/pokemon';
 import PokemonCard from "../components/pokemon-card";
+import PokemonService from "../services/pokemon-service";
 
 const PokemonList: FunctionComponent = () => {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [rowClass, setRowClass] = useState<string>("row");
 
   useEffect(() => {
-    fetch("https://api-pokemon-fr.vercel.app/api/v1/pokemon")
-      .then((response) => response.json())
-      .then((pokemons) => {
-        setPokemons(pokemons);
-      });
+    PokemonService.getPokemons().then(pokemons => setPokemons(pokemons));
   }, []);
 
   useEffect(() => {
