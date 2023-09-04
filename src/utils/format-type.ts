@@ -12,7 +12,7 @@ const formatType = (type: string): string => {
       color = "green lighten-1";
       break;
     case "Insecte":
-      color = "brown lighten-1";
+      color = "lime darken-1";
       break;
     case "Normal":
       color = "grey lighten-3";
@@ -27,14 +27,35 @@ const formatType = (type: string): string => {
       color = "pink lighten-4";
       break;
     case "Psy":
-      color = "deep-purple darken-2";
+      color = "pink accent-1";
       break;
-    case "Electrik":
-      color = "lime accent-1";
+    case "Électrik":
+      color = "yellow lighten-2";
       break;
     case "Combat":
       color = "deep-orange";
       break;
+    case "Sol":
+      color = "brown lighten-2";
+      break;
+    case "Roche":
+    color = "lime darken-2";
+    break;
+    case "Acier":
+    color = "cyan darken-1";
+    break;
+    case "Glace":
+    color = "light-blue lighten-4";
+    break;
+    case "Spectre":
+    color = "brown lighten-3";
+    break;
+    case "Dragon":
+    color = "indigo lighten-3";
+    break;
+    case "Ténèbres":
+    color = "grey";
+    break;
     default:
       color = "grey";
       break;

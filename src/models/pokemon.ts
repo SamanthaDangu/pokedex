@@ -1,30 +1,88 @@
 export default class Pokemon {
-  // 1. Typage des propiétés d'un pokémon.
-  id: number;
-  hp: number;
-  cp: number;
-  name: string;
-  picture: string;
-  types: Array<string>;
-  created: Date;
+  pokedexId: number;
+  generation: number;
+  category: string;
+  name: {
+    fr: string;
+    en: string;
+    jp: string;
+  };
+  sprites: {
+    regular: string;
+    shiny: string;
+    gmax: string | null;
+  };
+  types: Array<{
+    name: string;
+    image: string;
+  }>;
+  talents: Array<{
+    name: string;
+    tc: boolean;
+  }>;
+  stats: {
+    hp: number;
+    atk: number;
+    def: number;
+    spe_atk: number;
+    spe_def: number;
+    vit: number;
+  };
+  resistances: Array<{
+    name: string;
+    multiplier: number;
+  }>;
+  evolution: {
+    pre: Array<{
+      pokedexId: number;
+      name: string;
+    }> | null;
+    next: Array<{
+      pokedexId: number;
+      name: string;
+      condition: string;
+    }> | null;
+    mega: Array<{
+      orbe: string;
+      sprites: {
+        regular: string;
+        shiny: string;
+      };
+    }> | null;
+  };
+  height: string;
+  weight: string;
+  egg_groups: Array<string>;
+  sexe: {
+    male: number;
+    female: number;
+  };
+  catch_rate: number;
+  level_100: number;
+  forme: Array<{
+    alola?: string;
+    hisui?: string;
+    galar?: string;
+    paldea?: string;
+  }>;
 
-  // 2. Définition des valeurs par défaut des propriétés d'un pokémon.
-  constructor(
-    id: number,
-    hp: number = 100,
-    cp: number = 10,
-    name: string = "name",
-    picture: string = "http://...",
-    types: Array<string> = ["Normal"],
-    created: Date = new Date()
-  ) {
-    // 3. Initialisation des propiétés d'un pokémons.
-    this.id = id;
-    this.hp = hp;
-    this.cp = cp;
-    this.name = name;
-    this.picture = picture;
-    this.types = types;
-    this.created = created;
+  constructor(pokemonData: any) {
+    this.pokedexId = pokemonData.pokedexId;
+    this.generation = pokemonData.generation;
+    this.category = pokemonData.category;
+    this.name = pokemonData.name;
+    this.sprites = pokemonData.sprites;
+    this.types = pokemonData.types;
+    this.talents = pokemonData.talents;
+    this.stats = pokemonData.stats;
+    this.resistances = pokemonData.resistances;
+    this.evolution = pokemonData.evolution;
+    this.height = pokemonData.height;
+    this.weight = pokemonData.weight;
+    this.egg_groups = pokemonData.egg_groups;
+    this.sexe = pokemonData.sexe;
+    this.catch_rate = pokemonData.catch_rate;
+    this.level_100 = pokemonData.level_100;
+    this.forme = pokemonData.forme;
   }
 }
