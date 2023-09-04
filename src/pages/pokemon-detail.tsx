@@ -4,6 +4,7 @@ import Pokemon from "../models/pokemon";
 import PokemonService from "../services/pokemon-service";
 import EvolutionList from "../components/evolution-list"; 
 import PokemonDetails from "../components/pokemon-details"; 
+import { useHistory } from "react-router-dom";
 
 type Params = { id: string };
 
@@ -11,11 +12,20 @@ const PokemonsDetail: FunctionComponent<RouteComponentProps<Params>> = ({
   match,
 }) => {
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
+  const history = useHistory();
 
   useEffect(() => {
-    PokemonService.getPokemon(+match.params.id).then(pokemon => setPokemon(pokemon));
-  }, [match.params.id]);
-
+  
+    PokemonService.getPokemon(+match.params.id)
+      .then((response) => {
+        if (response && response.pokedexId) {
+          setPokemon(response);
+        } 
+      })
+      .catch(() => {
+        history.push("/page-not-found");
+      })
+  }, [history, match.params.id]);
   return (
     <div>
       {pokemon ? (
