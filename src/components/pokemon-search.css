@@ -3,3 +3,6 @@
   position: absolute;
   z-index: 999;
 }
+.search-pokemon::placeholder {
+  color: #003060;
+}

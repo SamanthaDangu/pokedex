@@ -11,7 +11,7 @@ type Props = {
 
 const PokemonCard: FunctionComponent<Props> = ({
   pokemon,
-  borderColor = "#009688",
+  borderColor = "#003060",
 }) => {
   const [color, setColor] = useState<string>();
   const history = useHistory();
@@ -34,7 +34,7 @@ const PokemonCard: FunctionComponent<Props> = ({
       onMouseEnter={showBorder}
       onMouseLeave={hideBorder}
     >
-      <div className="card horizontal" style={{ borderColor: color }}>
+      <div className="card horizontal" style={{ borderColor: color, borderRadius: "5px" }}>
         <div className="card-image">
           <img src={pokemon.sprites.regular} alt={pokemon.sprites.regular} className="responsive-img"/>
         </div>
