@@ -5,6 +5,7 @@ import PokemonService from "../services/pokemon-service";
 import EvolutionList from "../components/evolution-list"; 
 import PokemonDetails from "../components/pokemon-details"; 
 import { useHistory } from "react-router-dom";
+import Loader from "../components/loader";
 
 type Params = { id: string };
 
@@ -12,6 +13,7 @@ const PokemonsDetail: FunctionComponent<RouteComponentProps<Params>> = ({
   match,
 }) => {
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const history = useHistory();
 
   useEffect(() => {
@@ -20,24 +22,28 @@ const PokemonsDetail: FunctionComponent<RouteComponentProps<Params>> = ({
       .then((response) => {
         if (response && response.pokedexId) {
           setPokemon(response);
-        } 
-      })
-      .catch(() => {
-        history.push("/page-not-found");
+          setLoading(false);
+        } else {
+          history.push("/page-not-found");
+        }
       })
   }, [history, match.params.id]);
   return (
     <div>
-      {pokemon ? (
-        <div className="container row">
-          {/* Afficher les détails du Pokémon */}
-          <PokemonDetails pokemon={pokemon} />
-
-          {/* Afficher les évolutions */}
-          <EvolutionList pokemon={pokemon} />
-        </div>
+      {loading ? (
+        <h4 className="center"> <Loader /> </h4>
       ) : (
-        <h4 className="center">Aucun pokémon à afficher !</h4>
+        <div className="container row">
+          {pokemon && (
+            <>
+              {/* Afficher les détails du Pokémon */}
+              <PokemonDetails pokemon={pokemon} />
+
+              {/* Afficher les évolutions */}
+              <EvolutionList pokemon={pokemon} />
+            </>
+          )}
+        </div>
       )}
     </div>
   );

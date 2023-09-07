@@ -2,6 +2,8 @@ import React, { FunctionComponent, useState, useEffect } from "react";
 import Pokemon from '../models/pokemon';
 import PokemonCard from "../components/pokemon-card";
 import PokemonService from "../services/pokemon-service";
+import PokemonSearch from "../components/pokemon-search";
+import Loader from "../components/loader";
 
 const PokemonList: FunctionComponent = () => {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
@@ -35,9 +37,14 @@ const PokemonList: FunctionComponent = () => {
     <div>
       <h1 className="center">Pokédex</h1>
       <div className={`container ${rowClass}`}>
-        {pokemons.map(pokemon => (
-          <PokemonCard key={pokemon.pokedexId} pokemon={pokemon}/>
-        ))}
+        <PokemonSearch />
+        {pokemons.length > 0 ? (
+          pokemons.map(pokemon => (
+            <PokemonCard key={pokemon.pokedexId} pokemon={pokemon} />
+          ))
+        ) : (
+          <h4 className="center"><Loader /></h4>
+        )}
       </div>
     </div>
   );
