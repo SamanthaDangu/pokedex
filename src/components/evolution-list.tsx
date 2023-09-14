@@ -30,7 +30,7 @@ const EvolutionList: FunctionComponent<Props> = ({ pokemon }) => {
 
         const preEvos: (Pokemon | null)[] = await Promise.all(preEvoPromises);
 
-        // Filtrer les éléments null
+        // Filtre les éléments null
         const filteredPreEvos: Pokemon[] = preEvos.filter(
           (evo): evo is Pokemon => evo !== null
         );
@@ -56,7 +56,7 @@ const EvolutionList: FunctionComponent<Props> = ({ pokemon }) => {
 
         const nextEvos: (Pokemon | null)[] = await Promise.all(nextEvoPromises);
 
-        // Filtrer les éléments null
+        // Filtre les éléments null
         const filteredNextEvos: Pokemon[] = nextEvos.filter(
           (evo): evo is Pokemon => evo !== null
         );
@@ -65,7 +65,6 @@ const EvolutionList: FunctionComponent<Props> = ({ pokemon }) => {
       }
     };
 
-    // Appelez les fonctions pour obtenir les pré-évolutions et les next-évolutions
     fetchPreEvolutions();
     fetchNextEvolutions();
   }, [pokemon]);

@@ -37,7 +37,7 @@ const PokemonsDetail: FunctionComponent<RouteComponentProps<Params>> = ({ match 
 
   useEffect(() => {
     if (pokemon) {
-      // Calcule les IDs du Pokémon précédent et suivant
+      // Calcul les IDs du Pokémon précédent et suivant
       const prevPokemonId = pokemon.pokedexId - 1;
       const nextPokemonId = pokemon.pokedexId + 1;
 
@@ -45,7 +45,7 @@ const PokemonsDetail: FunctionComponent<RouteComponentProps<Params>> = ({ match 
         try {
           let response;
           if (pokemon.pokedexId === 1) {
-            // Si le Pokémon est le premier, charge le dernier Pokémon manuellement
+            // Si le Pokémon est le premier, charge le dernier Pokémon
             const lastPokemon = await PokemonService.getPokemon(1010);
             response = lastPokemon;
           } else {
@@ -61,7 +61,7 @@ const PokemonsDetail: FunctionComponent<RouteComponentProps<Params>> = ({ match 
         try {
           let response;
           if (pokemon.pokedexId === 1010) {
-            // Si le Pokémon est le dernier, charge le premier Pokémon manuellement
+            // Si le Pokémon est le dernier, charge le premier Pokémon
             const firstPokemon = await PokemonService.getPokemon(1);
             response = firstPokemon;
           } else {
@@ -86,10 +86,10 @@ const PokemonsDetail: FunctionComponent<RouteComponentProps<Params>> = ({ match 
         <div className="row">
           {pokemon && (
             <>
-              {/* Afficher les détails du Pokémon */}
+              {/* Affiche les détails du Pokémon */}
               <PokemonDetails pokemon={pokemon} pokemonPrev={pokemonPrev} pokemonNext={pokemonNext}/>
 
-              {/* Afficher les évolutions */}
+              {/* Affiche les évolutions */}
               <EvolutionList pokemon={pokemon} />
             </>
           )}

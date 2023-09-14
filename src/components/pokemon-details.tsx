@@ -26,6 +26,7 @@ const PokemonDetails: FunctionComponent<Props> = ({
       className="card col s12"
       style={{
         color: "#003060",
+        borderRadius: "2%"
       }}
     >
       <div
@@ -39,17 +40,18 @@ const PokemonDetails: FunctionComponent<Props> = ({
         {pokemonPrev && (
           <Link
             to={`/pokemons/${pokemonPrev.pokedexId}`}
-            className="button col s6 previous left-align"
+            className="button col s5 previous left-align"
           >
             <h5 className="button__text">
               {pokemonPrev.name.fr} <span>N°{pokemonPrev.pokedexId}</span>
             </h5>
           </Link>
         )}
+        <div className="col s2"></div>
         {pokemonNext && (
           <Link
             to={`/pokemons/${pokemonNext.pokedexId}`}
-            className="button col s6 next right-align"
+            className="button col s5 next right-align"
           >
             <h5 className="button__text">
               {pokemonNext.name.fr} <span>N°{pokemonNext.pokedexId}</span>
