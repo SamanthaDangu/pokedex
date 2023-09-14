@@ -23,7 +23,6 @@ const PokemonSearch: FunctionComponent = () => {
         <div
           className="card"
           style={{
-            backgroundColor: "lightblue",
             border: "3px solid #003060",
             color: "#003060",
             borderRadius: "10px",
