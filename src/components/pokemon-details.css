@@ -1,0 +1,18 @@
+.previous,
+.next {
+  background: #ffcc00; 
+  color: #2575BB; 
+  font-size: 18px; 
+  padding: 10px 20px;
+  border: none; 
+  border-radius: 5px; 
+  text-decoration: none; 
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease; 
+}
+
+.previous:hover,
+.next:hover {
+  background: #2575BB; 
+  color: #ffcc00; 
+}

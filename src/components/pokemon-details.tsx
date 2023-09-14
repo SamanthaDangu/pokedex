@@ -1,14 +1,20 @@
 import React, { FunctionComponent, useState } from "react";
 import Pokemon from "../models/pokemon";
+import "./pokemon-details.css";
 import formatType from "../utils/format-type";
 import formatGeneration from "../utils/format-generation";
+import { Link } from "react-router-dom";
 
 type Props = {
   pokemon: Pokemon;
+  pokemonPrev: Pokemon | null;
+  pokemonNext: Pokemon | null;
 };
 
 const PokemonDetails: FunctionComponent<Props> = ({
-  pokemon
+  pokemon,
+  pokemonPrev,
+  pokemonNext,
 }) => {
   const [isShiny, setIsShiny] = useState<boolean>();
   const toggleShiny = () => {
@@ -16,8 +22,49 @@ const PokemonDetails: FunctionComponent<Props> = ({
   };
 
   return (
-    <div className="col s12">
-      <h2 className="header center">
+    <div
+      className="card col s12"
+      style={{
+        color: "#003060",
+      }}
+    >
+      <div
+        className="col s12 buttons"
+        style={{
+          padding: "0px",
+          marginTop: "16px",
+          marginBottom: "16px",
+        }}
+      >
+        {pokemonPrev && (
+          <Link
+            to={`/pokemons/${pokemonPrev.pokedexId}`}
+            className="button col s6 previous left-align"
+          >
+            <h5 className="button__text">
+              {pokemonPrev.name.fr} <span>N°{pokemonPrev.pokedexId}</span>
+            </h5>
+          </Link>
+        )}
+        {pokemonNext && (
+          <Link
+            to={`/pokemons/${pokemonNext.pokedexId}`}
+            className="button col s6 next right-align"
+          >
+            <h5 className="button__text">
+              {pokemonNext.name.fr} <span>N°{pokemonNext.pokedexId}</span>
+            </h5>
+          </Link>
+        )}
+      </div>
+      <h2
+        className="center"
+        style={{
+          borderBottom: "3px solid #003060",
+          margin: "30px",
+          paddingBottom: "16px",
+        }}
+      >
         {pokemon.name.fr}{" "}
         <span style={{ color: "#616161" }}>N°{pokemon.pokedexId}</span>
       </h2>
@@ -36,7 +83,8 @@ const PokemonDetails: FunctionComponent<Props> = ({
             <div className="right-align">
               <button
                 onClick={toggleShiny}
-                className="waves-effect waves-light btn right-align"
+                className="btn right-align"
+                style={{ backgroundColor: "#2575bb" }}
               >
                 Shiny
               </button>
@@ -98,78 +146,84 @@ const PokemonDetails: FunctionComponent<Props> = ({
           </section>
         </div>
         {/* Bloc haut droite */}
-        <div className="col s8 m6" style={{ paddingLeft: "30px" }}>
-          <section
-            className="section col s12"
-            style={{
-              backgroundColor: "#A4A4A4",
-              borderRadius: "10px",
-              color: "white",
-            }}
-          >
-            <div className="col s6">
-              <h5>Taille</h5>
-              <p>{pokemon.height}</p> <h5>Poids</h5>
-              <p>{pokemon.weight}</p> <h5>Sexe</h5>
-              <p>
-                {pokemon.sexe === null && (
-                  <i className="material-icons">close</i>
-                )}
-                {pokemon.sexe && pokemon.sexe.male >= 1 && (
-                  <i className="material-icons">male</i>
-                )}
-                {pokemon.sexe && pokemon.sexe.female >= 1 && (
-                  <i className="material-icons">female</i>
-                )}
-              </p>
-            </div>
-            <div className="col s6">
-              <h5>Catégorie</h5>
-              <p>{pokemon.category}</p>
-              <h5>Talent</h5>
-              <p>
-                {pokemon.talents.map((talent, index) => (
-                  <span key={index}>{talent.name} </span>
-                ))}
-              </p>
-              <h5>Forme régionale</h5>
-              <p>
-                {pokemon.forme && pokemon.forme[0]
-                  ? Object.values(pokemon.forme[0])[0]
-                  : "Non"}
-              </p>
-            </div>
-          </section>
-          <section className="section col s12">
-            <h5>Région</h5>
-            <p>{formatGeneration(pokemon.generation)}</p>
-            <h5>Type(s)</h5>
-            <div>
-              {pokemon.types.map((type, index) => (
-                <span key={index} className={formatType(type.name)}>
-                  {type.name}{" "}
-                  <img
-                    src={type.image}
-                    alt={type.name}
-                    className="responsive-img"
-                  />
-                </span>
-              ))}
-            </div>
-            <h5>Faiblesse(s)</h5>
-            <div>
-              {pokemon.resistances.map((resistance, index) =>
-                resistance.multiplier === 2 ? (
-                  <span
-                    key={index}
-                    className={`${formatType(resistance.name)} col s3 center`}
-                  >
-                    {resistance.name}
+        <div className="row">
+          <div className="col s12 m6" style={{ paddingLeft: "30px" }}>
+            <section
+              className="section col s12"
+              style={{
+                backgroundColor: "#2575bb",
+                borderRadius: "10px",
+                color: "white",
+              }}
+            >
+              <div className="col s12 m6">
+                <h5>Taille</h5>
+                <p>{pokemon.height}</p>
+                <h5>Poids</h5>
+                <p>{pokemon.weight}</p>
+                <h5>Sexe</h5>
+                <p>
+                  {pokemon.sexe === null && (
+                    <i className="material-icons">close</i>
+                  )}
+                  {pokemon.sexe && pokemon.sexe.male >= 1 && (
+                    <i className="material-icons">male</i>
+                  )}
+                  {pokemon.sexe && pokemon.sexe.female >= 1 && (
+                    <i className="material-icons">female</i>
+                  )}
+                </p>
+              </div>
+              <div className="col s12 m6">
+                <h5>Catégorie</h5>
+                <p>{pokemon.category}</p>
+                <h5>Talent</h5>
+                <p>
+                  {pokemon.talents.map((talent, index) => (
+                    <span key={index}>{talent.name} </span>
+                  ))}
+                </p>
+                <h5>Forme régionale</h5>
+                <p>
+                  {pokemon.forme && pokemon.forme[0]
+                    ? Object.values(pokemon.forme[0])[0]
+                    : "Non"}
+                </p>
+              </div>
+            </section>
+            <section className="section col s12">
+              <h5>Région</h5>
+              <p>{formatGeneration(pokemon.generation)}</p>
+              <h5>Type(s)</h5>
+              <div>
+                {pokemon.types.map((type, index) => (
+                  <span key={index} className={formatType(type.name)}>
+                    {type.name}{" "}
+                    <img
+                      src={type.image}
+                      alt={type.name}
+                      className="responsive-img"
+                    />
                   </span>
-                ) : null
-              )}
-            </div>
-          </section>
+                ))}
+              </div>
+              <h5>Faiblesse(s)</h5>
+              <div className="row">
+                {pokemon.resistances.map((resistance, index) =>
+                  resistance.multiplier === 2 ? (
+                    <div
+                      key={index}
+                      className={`col s12 m6 l3 center ${formatType(
+                        resistance.name
+                      )}`}
+                    >
+                      {resistance.name}
+                    </div>
+                  ) : null
+                )}
+              </div>
+            </section>
+          </div>
         </div>
       </div>
     </div>
