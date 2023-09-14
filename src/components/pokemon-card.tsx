@@ -28,33 +28,54 @@ const PokemonCard: FunctionComponent<Props> = ({
   };
 
   return (
-    <div
-      className="col s6 m4"
-      onClick={() => goToPokemon(pokemon.pokedexId)}
-      onMouseEnter={showBorder}
-      onMouseLeave={hideBorder}
-    >
-      <div className="card horizontal" style={{ borderColor: color, borderRadius: "5px" }}>
-        <div className="card-image">
-          <img src={pokemon.sprites.regular} alt={pokemon.sprites.regular} className="responsive-img"/>
-        </div>
-        <div className="card-stacked">
-          <div className="card-content">
-            <p className="right-align">n°{pokemon.pokedexId}</p>
-            <div className="section">
-              <h5>{pokemon.name.fr}</h5>
-              <p>{pokemon.name.jp}</p>
-            </div>
+    <div className="col s12 m6 l3">
+      <div
+        onClick={() => goToPokemon(pokemon.pokedexId)}
+        onMouseEnter={showBorder}
+        onMouseLeave={hideBorder}
+      >
+        <div
+          className="card horizontal"
+          style={{
+            borderColor: color,
+            borderRadius: "5px",
+            height: "150px",
+            width: "auto",
+          }}
+        >
+          <div className="card-image valign-wrapper">
+            <img
+              src={pokemon.sprites.regular}
+              alt={pokemon.sprites.regular}
+              className="responsive-img"
+            />
           </div>
+          <div className="card-right" style={{ width: "100%" }}>
+            <div
+              className="card-content right-align"
+              style={{ width: "auto", height: "auto", padding: "6px" }}
+            >
+              <p className="right-align">n°{pokemon.pokedexId}</p>
+              <div className="section center">
+                <h5>{pokemon.name.fr}</h5>
+                <p>{pokemon.name.jp}</p>
+              </div>
+            </div>
             <div className="right-align">
               {pokemon &&
                 pokemon.types &&
                 pokemon.types.map((type) => (
                   <span key={type.name} className={formatType(type.name)}>
-                    {type.name} <img src={type.image} alt={type.name} className="responsive-img" />
+                    {type.name}{" "}
+                    <img
+                      src={type.image}
+                      alt={type.name}
+                      className="responsive-img"
+                    />
                   </span>
                 ))}
             </div>
+          </div>
         </div>
       </div>
     </div>
