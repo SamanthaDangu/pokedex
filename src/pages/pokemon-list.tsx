@@ -1,39 +1,19 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import Pokemon from "../models/pokemon";
-import "./pokemon-list.css"
+import "./pokemon-list.css";
 import PokemonCard from "../components/pokemon-card";
 import PokemonService from "../services/pokemon-service";
 import PokemonSearch from "../components/pokemon-search";
 import Loader from "../components/loader";
 import formatGeneration from "../utils/format-generation";
 import GenerationList from "../components/generation-list";
+import IntroductionPokedex from "../components/introduction-pokedex";
 
 const PokemonList: FunctionComponent = () => {
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
-  const [rowClass, setRowClass] = useState<string>("row");
 
   useEffect(() => {
     PokemonService.getPokemons().then((pokemons) => setPokemons(pokemons));
-  }, []);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 1550) {
-        setRowClass("row");
-      } else {
-        setRowClass(""); // Supprime la classe lorsque la taille de la fenêtre est inférieure à 1550px
-      }
-    };
-
-    // Écoute des changements de taille de la fenêtre
-    window.addEventListener("resize", handleResize);
-
-    handleResize();
-
-    // Nettoie l'écouteur d'événements lorsque le composant est démonté
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
   }, []);
 
   // Pokémons par générations
@@ -48,7 +28,6 @@ const PokemonList: FunctionComponent = () => {
 
   return (
     <div>
-      <h1 className="center">Pokédex</h1>
       <a
         className="btn-floating btn-large waves retour"
         href={`#top`}
@@ -56,7 +35,10 @@ const PokemonList: FunctionComponent = () => {
       >
         <i className="material-icons">arrow_upward</i>
       </a>
-      <div className={`container ${rowClass}`}>
+
+      <div>
+        <IntroductionPokedex />
+
         <PokemonSearch />
 
         {/* Liens vers chaque génération */}
@@ -69,8 +51,7 @@ const PokemonList: FunctionComponent = () => {
             className="card"
             key={generation}
             style={{
-              marginTop: "50px",
-              backgroundColor: "lightblue",
+              marginTop: "32px",
               border: "3px solid #003060",
               borderRadius: "10px",
             }}
@@ -78,7 +59,6 @@ const PokemonList: FunctionComponent = () => {
             <h2
               className="center"
               style={{
-                backgroundColor: "lightblue",
                 borderBottom: "3px solid #003060",
                 margin: "30px",
                 paddingBottom: "16px",
