@@ -5,22 +5,21 @@
 }
 
 #generation-link {
-  margin-top: 20px;
-  line-height: 60px;
+  line-height: 50px;
   font-weight: bold;
   font-size: large;
   color: #003060;
-  padding: 0 40px;
-  background: lightblue;
+  padding: 0 25px;
+  background: white;
   border: 3px solid #003060;
   border-radius: 40px;
-  box-shadow: 0 5px 20px 3px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.3);
 }
 
 #generation-link:hover {
   background: #003060;
   color: white;
   position: relative;
-  top: 10px;
+  top: 5px;
   box-shadow: none;
 }
