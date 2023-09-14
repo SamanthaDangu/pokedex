@@ -4,8 +4,14 @@ export default class PokemonService {
   static getPokemons(): Promise<Pokemon[]> {
     return fetch("https://api-pokemon-fr.vercel.app/api/v1/pokemon")
       .then((response) => response.json())
+      .then((data) => {
+        // Filtre les Pokémon avec un ID différent de zéro
+        const filteredData = data.filter((pokemon: Pokemon) => pokemon.pokedexId !== 0);
+        return filteredData;
+      })
       .catch((error) => this.handleError(error));
   }
+  
 
   static getPokemon(id: number): Promise<Pokemon | null> {
     return fetch(`https://api-pokemon-fr.vercel.app/api/v1/pokemon/${id}`)
