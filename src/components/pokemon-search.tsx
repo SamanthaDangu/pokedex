@@ -24,7 +24,6 @@ const PokemonSearch: FunctionComponent = () => {
           className="card"
           style={{
             border: "3px solid #003060",
-            color: "#003060",
             borderRadius: "10px",
           }}
         >

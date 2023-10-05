@@ -25,7 +25,6 @@ const PokemonDetails: FunctionComponent<Props> = ({
     <div
       className="card col s12"
       style={{
-        color: "#003060",
         borderRadius: "2%"
       }}
     >
@@ -42,20 +41,20 @@ const PokemonDetails: FunctionComponent<Props> = ({
             to={`/pokemons/${pokemonPrev.pokedexId}`}
             className="button col s5 previous left-align"
           >
-            <h5 className="button__text">
+            <h6 className="button__text">
               {pokemonPrev.name.fr} <span>N°{pokemonPrev.pokedexId}</span>
-            </h5>
+            </h6>
           </Link>
         )}
-        <div className="col s2"></div>
+        <div className="col s2 "></div>
         {pokemonNext && (
           <Link
             to={`/pokemons/${pokemonNext.pokedexId}`}
             className="button col s5 next right-align"
           >
-            <h5 className="button__text">
+            <h6 className="button__text">
               {pokemonNext.name.fr} <span>N°{pokemonNext.pokedexId}</span>
-            </h5>
+            </h6>
           </Link>
         )}
       </div>
@@ -65,6 +64,7 @@ const PokemonDetails: FunctionComponent<Props> = ({
           borderBottom: "3px solid #003060",
           margin: "30px",
           paddingBottom: "16px",
+          fontSize: "3rem"
         }}
       >
         {pokemon.name.fr}{" "}
@@ -156,9 +156,10 @@ const PokemonDetails: FunctionComponent<Props> = ({
                 backgroundColor: "#2575bb",
                 borderRadius: "10px",
                 color: "white",
+                padding: "0px"
               }}
             >
-              <div className="col s12 m6">
+              <div className="col s12 m6" style={{padding: "0px"}}>
                 <h5>Taille</h5>
                 <p>{pokemon.height}</p>
                 <h5>Poids</h5>
@@ -176,7 +177,7 @@ const PokemonDetails: FunctionComponent<Props> = ({
                   )}
                 </p>
               </div>
-              <div className="col s12 m6">
+              <div className="col s12 m6" style={{padding: "0px"}}>
                 <h5>Catégorie</h5>
                 <p>{pokemon.category}</p>
                 <h5>Talent</h5>

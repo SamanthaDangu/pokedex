@@ -20,6 +20,7 @@ const App: FunctionComponent = () => {
               className="responsive-img image-pokemon"
               src="./assets/International_Pokémon_logo.svg.png"
               alt="Pokémon_logo"
+              style={{width: "80%"}}
             />
           </Link>
         </header>

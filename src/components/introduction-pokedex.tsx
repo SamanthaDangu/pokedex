@@ -5,7 +5,6 @@ const IntroductionPokedex = () => {
     <div
       className="card"
       style={{
-        color: "#003060",
         borderRadius: "5px",
         padding: "32px"
       }}

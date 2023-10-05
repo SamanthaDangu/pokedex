@@ -2,14 +2,16 @@ import React, { FunctionComponent, useState, useEffect } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import Pokemon from "../models/pokemon";
 import PokemonService from "../services/pokemon-service";
-import EvolutionList from "../components/evolution-list"; 
-import PokemonDetails from "../components/pokemon-details"; 
+import EvolutionList from "../components/evolution-list";
+import PokemonDetails from "../components/pokemon-details";
 import { useHistory } from "react-router-dom";
 import Loader from "../components/loader";
 
 type Params = { id: string };
 
-const PokemonsDetail: FunctionComponent<RouteComponentProps<Params>> = ({ match }) => {
+const PokemonsDetail: FunctionComponent<RouteComponentProps<Params>> = ({
+  match,
+}) => {
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
   const [pokemonPrev, setPokemonPrev] = useState<Pokemon | null>(null);
   const [pokemonNext, setPokemonNext] = useState<Pokemon | null>(null);
@@ -41,11 +43,11 @@ const PokemonsDetail: FunctionComponent<RouteComponentProps<Params>> = ({ match 
       const prevPokemonId = pokemon.pokedexId - 1;
       const nextPokemonId = pokemon.pokedexId + 1;
 
+      // Fonction pour que si le Pokémon est le premier, charge le dernier Pokémon
       const fetchPrevPokemon = async () => {
         try {
           let response;
           if (pokemon.pokedexId === 1) {
-            // Si le Pokémon est le premier, charge le dernier Pokémon
             const lastPokemon = await PokemonService.getPokemon(1010);
             response = lastPokemon;
           } else {
@@ -57,6 +59,7 @@ const PokemonsDetail: FunctionComponent<RouteComponentProps<Params>> = ({ match 
         }
       };
 
+      // Fonction pour que si le Pokémon est le dernier, charge le premier Pokémon
       const fetchNextPokemon = async () => {
         try {
           let response;
@@ -81,13 +84,20 @@ const PokemonsDetail: FunctionComponent<RouteComponentProps<Params>> = ({ match 
   return (
     <div>
       {loading ? (
-        <h4 className="center"> <Loader /> </h4>
+        <h4 className="center">
+          {" "}
+          <Loader />{" "}
+        </h4>
       ) : (
         <div className="row">
           {pokemon && (
             <>
               {/* Affiche les détails du Pokémon */}
-              <PokemonDetails pokemon={pokemon} pokemonPrev={pokemonPrev} pokemonNext={pokemonNext}/>
+              <PokemonDetails
+                pokemon={pokemon}
+                pokemonPrev={pokemonPrev}
+                pokemonNext={pokemonNext}
+              />
 
               {/* Affiche les évolutions */}
               <EvolutionList pokemon={pokemon} />

@@ -62,7 +62,6 @@ const PokemonList: FunctionComponent = () => {
                 borderBottom: "3px solid #003060",
                 margin: "30px",
                 paddingBottom: "16px",
-                color: "#003060",
               }}
             >
               {formatGeneration(Number(generation))}
