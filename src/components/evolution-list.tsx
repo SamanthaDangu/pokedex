@@ -1,8 +1,8 @@
 import React, { FunctionComponent, useState, useEffect } from "react";
 import "./evolution-list.css";
 import Pokemon from "../models/pokemon";
-import formatType from "../utils/format-type";
 import PokemonService from "../services/pokemon-service";
+import PokemonCard from "./pokemon-card-detail";
 
 type Props = {
   pokemon: Pokemon;
@@ -30,7 +30,7 @@ const EvolutionList: FunctionComponent<Props> = ({ pokemon }) => {
 
         const preEvos: (Pokemon | null)[] = await Promise.all(preEvoPromises);
 
-        // Filtre les éléments null
+        // Filtrer les éléments null
         const filteredPreEvos: Pokemon[] = preEvos.filter(
           (evo): evo is Pokemon => evo !== null
         );
@@ -56,7 +56,7 @@ const EvolutionList: FunctionComponent<Props> = ({ pokemon }) => {
 
         const nextEvos: (Pokemon | null)[] = await Promise.all(nextEvoPromises);
 
-        // Filtre les éléments null
+        // Filtrer les éléments null
         const filteredNextEvos: Pokemon[] = nextEvos.filter(
           (evo): evo is Pokemon => evo !== null
         );
@@ -65,6 +65,7 @@ const EvolutionList: FunctionComponent<Props> = ({ pokemon }) => {
       }
     };
 
+    // Appelez les fonctions pour obtenir les pré-évolutions et les next-évolutions
     fetchPreEvolutions();
     fetchNextEvolutions();
   }, [pokemon]);
@@ -73,177 +74,64 @@ const EvolutionList: FunctionComponent<Props> = ({ pokemon }) => {
     <div
       className="section col s12 center"
       style={{
-        backgroundColor: "#A4A4A4",
+        backgroundColor: "#2575bb",
         borderRadius: "10px",
         color: "white",
+        padding: "0px",
       }}
     >
-      <section>
-        <h5>Évolutions</h5>
-        {pokemon.evolution === null && (
-          <div className="no-evolution">
-            <p>Ce Pokémon n'a pas d'évolution.</p>
-          </div>
-        )}
-      </section>
+      <h5>Évolutions</h5>
+      {pokemon.evolution === null && (
+        <div className="no-evolution">
+          <p>Ce Pokémon n'a pas d'évolution.</p>
+        </div>
+      )}
       <div className="evolutions">
-        {/** PRE-EVOLUTION*/}
+        {/* PRE-EVOLUTION */}
         {pokemon.evolution &&
           pokemon.evolution.pre &&
           pokemon.evolution.pre.length > 0 && (
             <div className="evolutions">
               {preEvolutions.map((preEvo, index) => (
-                <div
-                  key={index}
-                  className="evolutions"
-                  style={{ margin: "10px" }}
-                >
-                  <div className="custom-card">
-                    <div className="card-top">
-                      <img
-                        src={preEvo.sprites.regular}
-                        alt={preEvo.name.fr}
-                        className="round-image responsive-img"
-                      />
-                    </div>
-                    <div className="section">
-                      <h5>
-                        {preEvo.name.fr}{" "}
-                        <span style={{ color: "#616161" }}>
-                          N°{preEvo.pokedexId}
-                        </span>
-                      </h5>
-                      <div>
-                        {preEvo.types.map((type, index) => (
-                          <span key={index} className={formatType(type.name)}>
-                            {type.name}
-                            <img
-                              src={type.image}
-                              alt={type.name}
-                              className="responsive-img"
-                            />
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  {preEvo.evolution &&
-                    preEvo.evolution.next &&
-                    preEvo.evolution.next.length > 0 && (
-                      <i className="large material-icons">chevron_right</i>
-                    )}
-                </div>
+                <PokemonCard key={index} pokemon={preEvo} />
               ))}
             </div>
           )}
 
-        {/** POKEMON DE LA PAGE*/}
-        <div style={{ margin: "10px" }}>
-          <div className="custom-card">
-            <div className="card-top">
-              {
-                <img
-                  src={pokemon.sprites.regular}
-                  alt={pokemon.name.fr}
-                  className="round-image responsive-img"
-                />
-              }
-            </div>
-            <div className="section">
-              <h5>
-                {pokemon.name.fr}{" "}
-                <span style={{ color: "#616161" }}>N°{pokemon.pokedexId}</span>
-              </h5>
-              <div>
-                {pokemon.types.map((type, index) => (
-                  <span key={index} className={formatType(type.name)}>
-                    {type.name}{" "}
-                    <img
-                      src={type.image}
-                      alt={type.name}
-                      className="responsive-img"
-                    />
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-        {pokemon.evolution &&
-          pokemon.evolution.next &&
-          pokemon.evolution.next.length > 0 && (
-            <i className="large material-icons">chevron_right</i>
-          )}
-        {/** NEXT-EVOLUTION*/}
+        {/* POKEMON DE LA PAGE */}
+        <PokemonCard pokemon={pokemon} />
+
+        {/* NEXT-EVOLUTION */}
         {pokemon.evolution &&
           pokemon.evolution.next &&
           pokemon.evolution.next.length > 0 && (
             <div className="evolutions">
               {nextEvolutions.map((nextEvo, index) => (
-                <div
-                  key={index}
-                  className="evolutions"
-                  style={{ margin: "10px" }}
-                >
-                  <div className="custom-card">
-                    <div className="card-top">
-                      <img
-                        src={nextEvo.sprites.regular}
-                        alt={nextEvo.name.fr}
-                        className="round-image responsive-img"
-                      />
-                    </div>
-                    <div className="section">
-                      <h5>
-                        {nextEvo.name.fr}{" "}
-                        <span style={{ color: "#616161" }}>
-                          N°{nextEvo.pokedexId}
-                        </span>
-                      </h5>
-                      <div>
-                        {nextEvo.types.map((type, index) => (
-                          <span key={index} className={formatType(type.name)}>
-                            {type.name}
-                            <img
-                              src={type.image}
-                              alt={type.name}
-                              className="responsive-img"
-                            />
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  {nextEvo.evolution &&
-                    nextEvo.evolution.next &&
-                    nextEvo.evolution.next.length > 0 && (
-                      <i className="large material-icons">chevron_right</i>
-                    )}
-                </div>
+                <PokemonCard key={index} pokemon={nextEvo} />
               ))}
             </div>
           )}
       </div>
       <h5>Méga-Évolution</h5>
       {pokemon.evolution && pokemon.evolution.mega === null && (
-        <div className="no-evolution">
+        <div>
           <p>Ce Pokémon n'a pas d'évolution.</p>
         </div>
       )}
       <div className="evolutions">
-        {/** MEGA-EVOLUTION*/}
+        {/* MEGA-EVOLUTION */}
         {pokemon.evolution &&
           pokemon.evolution.mega &&
           pokemon.evolution.mega.length > 0 && (
-            <div>
+            <div className="evolutions">
               {pokemon.evolution.mega.map((pokemon, index) => (
                 <div key={index}>
-                  <div className="custom-card">
+                  <div className="custom-card" style={{ margin: "16px" }}>
                     <div className="card-top">
                       <img
                         src={pokemon.sprites.regular}
                         alt={pokemon.orbe}
-                        className="round-image responsive-img"
+                        className="responsive-img"
                       />
                     </div>
                     <div className="section">
