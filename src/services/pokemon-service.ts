@@ -2,7 +2,7 @@ import Pokemon from "../models/pokemon";
 
 export default class PokemonService {
   static getPokemons(): Promise<Pokemon[]> {
-    return fetch("https://api-pokemon-fr.vercel.app/api/v1/pokemon")
+    return fetch("https://tyradex.vercel.app/api/v1/pokemon")
       .then((response) => response.json())
       .then((data) => {
         // Filtre les Pokémon avec un ID différent de zéro
@@ -14,7 +14,7 @@ export default class PokemonService {
   
 
   static getPokemon(id: number): Promise<Pokemon | null> {
-    return fetch(`https://api-pokemon-fr.vercel.app/api/v1/pokemon/${id}`)
+    return fetch(`https://tyradex.vercel.app/api/v1/pokemon/${id}`)
       .then((response) => response.json())
       .then((data) => (this.isEmpty(data) ? null : data))
       .catch((error) => this.handleError(error));
