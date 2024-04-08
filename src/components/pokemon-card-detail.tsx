@@ -10,7 +10,7 @@ type Props = {
 const PokemonCard: FunctionComponent<Props> = ({ pokemon }) => {
   return (
     <div>
-      <Link to={`${pokemon.pokedexId}`}>
+      <Link to={`${pokemon.pokedex_id}`}>
         <div className="card-top">
           <img
             src={pokemon.sprites.regular}
@@ -19,8 +19,8 @@ const PokemonCard: FunctionComponent<Props> = ({ pokemon }) => {
           />
         </div>
         <div className="section">
-          <h5 style={{color: "white"}}>
-            {pokemon.name.fr} <span>N°{pokemon.pokedexId}</span>
+          <h5 style={{ color: "white" }}>
+            {pokemon.name.fr} <span>N°{pokemon.pokedex_id}</span>
           </h5>
           <div>
             {pokemon.types.map((type, index) => (

@@ -6,12 +6,13 @@ export default class PokemonService {
       .then((response) => response.json())
       .then((data) => {
         // Filtre les Pokémon avec un ID différent de zéro
-        const filteredData = data.filter((pokemon: Pokemon) => pokemon.pokedexId !== 0);
+        const filteredData = data.filter(
+          (pokemon: Pokemon) => pokemon.pokedex_id !== 0
+        );
         return filteredData;
       })
       .catch((error) => this.handleError(error));
   }
-  
 
   static getPokemon(id: number): Promise<Pokemon | null> {
     return fetch(`https://tyradex.vercel.app/api/v1/pokemon/${id}`)

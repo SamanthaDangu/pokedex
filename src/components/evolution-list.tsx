@@ -21,7 +21,7 @@ const EvolutionList: FunctionComponent<Props> = ({ pokemon }) => {
         pokemon.evolution.pre.length > 0
       ) {
         const preEvolutionIds: number[] = pokemon.evolution.pre.map(
-          (preEvolution: { pokedexId: number }) => preEvolution.pokedexId
+          (preEvolution: { pokedex_id: number }) => preEvolution.pokedex_id
         );
 
         const preEvoPromises: Promise<Pokemon | null>[] = preEvolutionIds.map(
@@ -47,7 +47,7 @@ const EvolutionList: FunctionComponent<Props> = ({ pokemon }) => {
         pokemon.evolution.next.length > 0
       ) {
         const nextEvolutionIds: number[] = pokemon.evolution.next.map(
-          (nextEvolution: { pokedexId: number }) => nextEvolution.pokedexId
+          (nextEvolution: { pokedex_id: number }) => nextEvolution.pokedex_id
         );
 
         const nextEvoPromises: Promise<Pokemon | null>[] = nextEvolutionIds.map(

@@ -25,7 +25,7 @@ const PokemonDetails: FunctionComponent<Props> = ({
     <div
       className="card col s12"
       style={{
-        borderRadius: "2%"
+        borderRadius: "2%",
       }}
     >
       <div
@@ -38,22 +38,22 @@ const PokemonDetails: FunctionComponent<Props> = ({
       >
         {pokemonPrev && (
           <Link
-            to={`/pokemons/${pokemonPrev.pokedexId}`}
+            to={`/pokemons/${pokemonPrev.pokedex_id}`}
             className="button col s5 previous left-align"
           >
             <h6 className="button__text">
-              {pokemonPrev.name.fr} <span>N°{pokemonPrev.pokedexId}</span>
+              {pokemonPrev.name.fr} <span>N°{pokemonPrev.pokedex_id}</span>
             </h6>
           </Link>
         )}
         <div className="col s2 "></div>
         {pokemonNext && (
           <Link
-            to={`/pokemons/${pokemonNext.pokedexId}`}
+            to={`/pokemons/${pokemonNext.pokedex_id}`}
             className="button col s5 next right-align"
           >
             <h6 className="button__text">
-              {pokemonNext.name.fr} <span>N°{pokemonNext.pokedexId}</span>
+              {pokemonNext.name.fr} <span>N°{pokemonNext.pokedex_id}</span>
             </h6>
           </Link>
         )}
@@ -64,11 +64,11 @@ const PokemonDetails: FunctionComponent<Props> = ({
           borderBottom: "3px solid #003060",
           margin: "30px",
           paddingBottom: "16px",
-          fontSize: "3rem"
+          fontSize: "3rem",
         }}
       >
         {pokemon.name.fr}{" "}
-        <span style={{ color: "#616161" }}>N°{pokemon.pokedexId}</span>
+        <span style={{ color: "#616161" }}>N°{pokemon.pokedex_id}</span>
       </h2>
       <div className="section">
         {/* Bloc haut gauche */}
@@ -156,10 +156,10 @@ const PokemonDetails: FunctionComponent<Props> = ({
                 backgroundColor: "#2575bb",
                 borderRadius: "10px",
                 color: "white",
-                padding: "0px"
+                padding: "0px",
               }}
             >
-              <div className="col s12 m6" style={{padding: "0px"}}>
+              <div className="col s12 m6" style={{ padding: "0px" }}>
                 <h5>Taille</h5>
                 <p>{pokemon.height}</p>
                 <h5>Poids</h5>
@@ -177,7 +177,7 @@ const PokemonDetails: FunctionComponent<Props> = ({
                   )}
                 </p>
               </div>
-              <div className="col s12 m6" style={{padding: "0px"}}>
+              <div className="col s12 m6" style={{ padding: "0px" }}>
                 <h5>Catégorie</h5>
                 <p>{pokemon.category}</p>
                 <h5>Talent</h5>

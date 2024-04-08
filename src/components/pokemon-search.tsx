@@ -49,8 +49,8 @@ const PokemonSearch: FunctionComponent = () => {
                   })
                   .map((val) => (
                     <Link
-                      key={val.pokedexId}
-                      to={`/pokemons/${val.pokedexId}`}
+                      key={val.pokedex_id}
+                      to={`/pokemons/${val.pokedex_id}`}
                       className="collection-item"
                       style={{
                         color: "#003060",

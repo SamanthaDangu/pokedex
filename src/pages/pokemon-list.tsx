@@ -68,7 +68,7 @@ const PokemonList: FunctionComponent = () => {
             </h2>
             <div className="row">
               {generations[generation].map((pokemon) => (
-                <PokemonCard key={pokemon.pokedexId} pokemon={pokemon} />
+                <PokemonCard key={pokemon.pokedex_id} pokemon={pokemon} />
               ))}
             </div>
           </div>

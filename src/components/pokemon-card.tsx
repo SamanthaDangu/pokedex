@@ -30,7 +30,7 @@ const PokemonCard: FunctionComponent<Props> = ({
   return (
     <div className="col s12 m6 l3">
       <div
-        onClick={() => goToPokemon(pokemon.pokedexId)}
+        onClick={() => goToPokemon(pokemon.pokedex_id)}
         onMouseEnter={showBorder}
         onMouseLeave={hideBorder}
       >
@@ -55,7 +55,7 @@ const PokemonCard: FunctionComponent<Props> = ({
               className="card-content right-align"
               style={{ width: "auto", height: "auto", padding: "6px" }}
             >
-              <p className="right-align">n°{pokemon.pokedexId}</p>
+              <p className="right-align">n°{pokemon.pokedex_id}</p>
               <div className="section center">
                 <h5>{pokemon.name.fr}</h5>
                 <p>{pokemon.name.jp}</p>

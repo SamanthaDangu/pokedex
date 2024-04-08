@@ -22,7 +22,7 @@ const PokemonsDetail: FunctionComponent<RouteComponentProps<Params>> = ({
     const fetchData = async () => {
       try {
         const response = await PokemonService.getPokemon(+match.params.id);
-        if (response && response.pokedexId) {
+        if (response && response.pokedex_id) {
           setPokemon(response);
           setLoading(false);
         } else {
@@ -40,14 +40,14 @@ const PokemonsDetail: FunctionComponent<RouteComponentProps<Params>> = ({
   useEffect(() => {
     if (pokemon) {
       // Calcul les IDs du Pokémon précédent et suivant
-      const prevPokemonId = pokemon.pokedexId - 1;
-      const nextPokemonId = pokemon.pokedexId + 1;
+      const prevPokemonId = pokemon.pokedex_id - 1;
+      const nextPokemonId = pokemon.pokedex_id + 1;
 
       // Fonction pour que si le Pokémon est le premier, charge le dernier Pokémon
       const fetchPrevPokemon = async () => {
         try {
           let response;
-          if (pokemon.pokedexId === 1) {
+          if (pokemon.pokedex_id === 1) {
             const lastPokemon = await PokemonService.getPokemon(1010);
             response = lastPokemon;
           } else {
@@ -63,7 +63,7 @@ const PokemonsDetail: FunctionComponent<RouteComponentProps<Params>> = ({
       const fetchNextPokemon = async () => {
         try {
           let response;
-          if (pokemon.pokedexId === 1010) {
+          if (pokemon.pokedex_id === 1010) {
             // Si le Pokémon est le dernier, charge le premier Pokémon
             const firstPokemon = await PokemonService.getPokemon(1);
             response = firstPokemon;

@@ -1,5 +1,5 @@
 export default class Pokemon {
-  pokedexId: number;
+  pokedex_id: number;
   generation: number;
   category: string;
   name: {
@@ -34,11 +34,11 @@ export default class Pokemon {
   }>;
   evolution: {
     pre: Array<{
-      pokedexId: number;
+      pokedex_id: number;
       name: string;
     }> | null;
     next: Array<{
-      pokedexId: number;
+      pokedex_id: number;
       name: string;
       condition: string;
     }> | null;
@@ -67,7 +67,7 @@ export default class Pokemon {
   }>;
 
   constructor(pokemonData: any) {
-    this.pokedexId = pokemonData.pokedexId;
+    this.pokedex_id = pokemonData.pokedex_id;
     this.generation = pokemonData.generation;
     this.category = pokemonData.category;
     this.name = pokemonData.name;
