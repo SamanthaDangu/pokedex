@@ -63,7 +63,7 @@ const PokemonsDetail: FunctionComponent<RouteComponentProps<Params>> = ({
       const fetchNextPokemon = async () => {
         try {
           let response;
-          if (pokemon.pokedex_id === 1010) {
+          if (pokemon.pokedex_id === 1025) {
             // Si le Pokémon est le dernier, charge le premier Pokémon
             const firstPokemon = await PokemonService.getPokemon(1);
             response = firstPokemon;
