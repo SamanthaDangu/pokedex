@@ -48,7 +48,7 @@ const PokemonsDetail: FunctionComponent<RouteComponentProps<Params>> = ({
         try {
           let response;
           if (pokemon.pokedex_id === 1) {
-            const lastPokemon = await PokemonService.getPokemon(1010);
+            const lastPokemon = await PokemonService.getPokemon(1025);
             response = lastPokemon;
           } else {
             response = await PokemonService.getPokemon(prevPokemonId);
